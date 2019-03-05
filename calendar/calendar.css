@@ -1,0 +1,16 @@
+.calendar .events .event-groups > ul{
+    position:relative;
+    padding: 0 5%;
+    display:flex;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling:touch;
+}
+
+.calendar .events .single-event {
+    flex-shrink:0;
+    float:left;
+    height:120px;
+    width:70%;
+    max-width:200px;
+    background-color:chartreuse;
+}
