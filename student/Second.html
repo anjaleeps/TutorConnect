@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>MyTutorSecond</title>
-<link href="Second.css" rel="stylesheet"/>
+    <meta charset="ISO-8859-1">
+    <title>MyTutorSecond</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="Second.css" rel="stylesheet" />
 </head>
 <body>
-<div id="container">
-<h2> Find your Tutor</h2>
-<div align ="center">
-	<input type="text" name="Search by subjext name" placeholder="Subject"/>
-	<input type="text" name="Search by Tutor's name" placeholder="Tutor's Name"/>
-	<input type="text" name="Home Town" placeholder="Home Town"/>
-	<input name="Search" type="submit" value="Search"/>
-</div>
-</div>
+    <script src="second.js"></script>
+    <div id="container">
+        <h2> Find your Tutor</h2>
+        <div align="center">
+            <form id="search_form" onsubmit="search()">
+                <input type="text" name="homeTown" placeholder="Home Town" />
+                <input name="Search" type="submit" value="Search" />
+            </form>
+        </div>
+        <div id="search_results"></div>
+    </div>
 </body>
 </html>
