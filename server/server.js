@@ -4,14 +4,19 @@ var url = require('url');
 var searchTutors = require('./database.js').searchTutors;
 
 http.createServer(function (request, response) {
-    response.setHeader('Access-Control-Allow-Origin', '*');
+    const headers = {
+        'Access-Control-Allow-Origin': 'http://localhost:8080',
+        'Access-Control-Allow-Methods': 'OPTIONS, POST, GET',
+        'Access-Control-Max-Age': 2592000 // 30 days
+        
+    };
     console.log(request.url);
     var address = request.url;
     var q = url.parse(address, true);
     console.log(q.query.action);
 
-    if (q.query.Search == 'Search') {
-        console.log('reached');
+    if (q.query.action == 'searchTutors') {
+        console.log('action:reached');
         searchTutors(request.url, function (err, results) {
             if (err) { console.log(err) }
 

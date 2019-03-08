@@ -11,7 +11,7 @@
     <div id="container">
         <h2> Find your Tutor</h2>
         <div align="center">
-            <form id="search_form" onsubmit="search()">
+            <form id="search_form" onsubmit="event.preventDefault(); search();">
                 <input type="text" name="homeTown" placeholder="Home Town" />
                 <input name="Search" type="submit" value="Search" />
             </form>

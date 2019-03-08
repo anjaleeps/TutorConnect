@@ -2,8 +2,8 @@
 function search() {
     $.ajax({
         type: "GET",
-        url: "localhost:8080",
-        data: { action: 'search_tutors', homeTown: $('#homeTown').val() },
+        url: "http://localhost:8080",
+        data: { action: 'searchTutors', homeTown: $('[name=homeTown]').val() },
         cache: false,
         success: function (results) {
             showResults(results);
@@ -20,6 +20,7 @@ function search() {
     });
 }
 
-function showResults() {
-    
+function showResults(results) {
+    alert(results);
 }
+
