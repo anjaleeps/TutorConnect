@@ -2,7 +2,7 @@
 function search() {
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080",
+        url: "http://localhost:8080/query.js",
         data: { action: 'searchTutors', homeTown: $('[name=homeTown]').val() },
         cache: false,
         success: function (results) {
