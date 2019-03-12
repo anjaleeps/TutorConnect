@@ -55,6 +55,12 @@ exports.handleQuery = function (request, response) {
                 response.write(JSON.stringify(results));
                 response.end();
             });
+        case 'getCalInfo':
+            db.getCalInfo(request.url, function (err, events) {
+                if (err) { console.log(err) }
+                response.writeHead(200, { 'Content-Type': 'application/json' });
+                response.write(JSON.stringify(events));
+            });
         default:
             console.log('Invalid Query');
     }
