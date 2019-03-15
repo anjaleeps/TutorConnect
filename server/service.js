@@ -49,18 +49,29 @@ exports.handleQuery = function (request, response) {
 
     switch (action) {
         case 'searchTutors':
-            db.searchTutors(request.url, function (err, results) {
+            db.searchTutors(queryUrl, function (err, results) {
                 if (err) { console.log(err) }
                 response.writeHead(200, { 'Content-Type': 'application/json' });
                 response.write(JSON.stringify(results));
                 response.end();
             });
+            break;
         case 'getCalInfo':
-            db.getCalInfo(request.url, function (err, events) {
+            db.getCalInfo(queryUrl, function (err, events) {
                 if (err) { console.log(err) }
                 response.writeHead(200, { 'Content-Type': 'application/json' });
                 response.write(JSON.stringify(events));
+                response.end();
             });
+            break;
+        case 'getFreeSlots':
+            db.getFreeSlots(queryUrl, function (err, results) {
+                if (err) { console.log(err) }
+                response.writeHead(200, { 'Content-Type': 'application/json' });
+                response.write(JSON.stringify(results));
+                response.end();
+            });
+            break;
         default:
             console.log('Invalid Query');
     }

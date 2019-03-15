@@ -3,214 +3,101 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="calStyle.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="../jquery/jquery.min.js"></script>
     <script src="calendar.js"></script>
 </head>
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th class="heading"></th>
-                <th class="heading">
-   
-                    <span class="long">Monday</span>
-                    <span class="short">Mon</span>
-                </th>
-                <th class="heading">
-                    
-                    <span class="long">Tuesday</span>
-                    <span class="short">Tue</span>
-                </th>
-                <th class="heading">
-                    
-                    <span class="long">Wendsday</span>
-                    <span class="short">We</span>
-                </th>
-                <th class="heading">
-                    
-                    <span class="long">Thursday</span>
-                    <span class="short">Thur</span>
-                </th>
-                <th class="heading">
-                    
-                    <span class="long">Friday</span>
-                    <span class="short">Fri</span>
-                </th>
-                <th class="heading">
-                    
-                    <span class="long">Saturday</span>
-                    <span class="short">Sat</span>
-                </th>
-                <th class="heading">
-                    
-                    <span class="long">Sunday</span>
-                    <span class="short">Sun</span>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="hour" rowspan="2"><span>5:00</span></td>
-                <td class="mon five"></td>
-                <td class="tues five"></td>
-                <td class="wed five"></td>
-                <td class="thurs five"></td>
-                <td class="fri five"></td>
-                <td class="sat five"></td>
-                <td class="sun five"></td>
-            </tr>
-            <tr>
-                <td class="mon five"></td>
-                <td class="tues five"></td>
-                <td class="wed five"></td>
-                <td class="thurs five"></td>
-                <td class="fri five"></td>
-                <td class="sat five"></td>
-                <td class="sun five"></td>
-            </tr>
+    <div id="table_box">
+        <table>
+            <thead>
+                <tr>
+                    <th class="heading">
 
-            <tr>
-                <td class="hour" rowspan="2"><span>6:00</span></td>
-                <td class="mon six"></td>
-                <td class="tues six"></td>
-                <td class="wed six"></td>
-                <td class="thurs six"></td>
-                <td class="fri six"></td>
-                <td class="sat six"></td>
-                <td class="sun six"></td>
-            </tr>
-            <tr>
-                <td class="mon six"></td>
-                <td class="tues six"></td>
-                <td class="wed six"></td>
-                <td class="thurs six"></td>
-                <td class="fri six"></td>
-                <td class="sat six"></td>
-                <td class="sun six"></td>
-            </tr>
+                        <span class="long">Monday</span>
+                        <span class="short">Mon</span>
+                    </th>
+                    <th class="heading">
 
+                        <span class="long">Tuesday</span>
+                        <span class="short">Tue</span>
+                    </th>
+                    <th class="heading">
 
-            <tr>
-                <td class="hour" rowspan="2"><span>7:00</span></td>
-                <td class="mon seven"></td>
-                <td class="tues seven"></td>
-                <td class="wed seven"></td>
-                <td class="thurs seven"></td>
-                <td class="fri seven"></td>
-                <td class="sat seven"></td>
-                <td class="sun seven"></td>
-            </tr>
-            <tr>
-                <td class="mon seven"></td>
-                <td class="tues seven"></td>
-                <td class="wed seven"></td>
-                <td class="thurs seven"></td>
-                <td class="fri seven"></td>
-                <td class="sat seven"></td>
-                <td class="sun seven"></td>
-            </tr>
+                        <span class="long">Wednesday</span>
+                        <span class="short">Wed</span>
+                    </th>
+                    <th class="heading">
 
-            <tr>
-                <td class="hour" rowspan="2"><span>8:00</span></td>
-                <td class="mon eight"></td>
-                <td class="tues eight"></td>
-                <td class="wed eight"></td>
-                <td class="thurs eight"></td>
-                <td class="fri eight"></td>
-                <td class="sat eight"></td>
-                <td class="sun eight"></td>
-            </tr>
-            <tr>
-                <td class="mon eight"></td>
-                <td class="tues eight"></td>
-                <td class="wed eight"></td>
-                <td class="thurs eight"></td>
-                <td class="fri eight"></td>
-                <td class="sat eight"></td>
-                <td class="sun eight"></td>
-            </tr>
+                        <span class="long">Thursday</span>
+                        <span class="short">Thur</span>
+                    </th>
+                    <th class="heading">
 
-            <tr>
-                <td class="hour" rowspan="2"><span>9:00</span></td>
-                <td class="mon nine"></td>
-                <td class="tues nine"></td>
-                <td class="wed nine"></td>
-                <td class="thurs nine"></td>
-                <td class="fri nine"></td>
-                <td class="sat nine"></td>
-                <td class="sun nine"></td>
-            </tr>
-            <tr>
-                <td class="mon nine"></td>
-                <td class="tues nine"></td>
-                <td class="wed nine"></td>
-                <td class="thurs nine"></td>
-                <td class="fri nine"></td>
-                <td class="sat nine"></td>
-                <td class="sun nine"></td>
-            </tr>
+                        <span class="long">Friday</span>
+                        <span class="short">Fri</span>
+                    </th>
+                    <th class="heading">
 
-            <tr>
-                <td class="hour" rowspan="2"><span>10:00</span></td>
-                <td class="mon ten"></td>
-                <td class="tues ten"></td>
-                <td class="wed ten"></td>
-                <td class="thurs ten"></td>
-                <td class="fri ten"></td>
-                <td class="sat ten"></td>
-                <td class="sun ten"></td>
-            </tr>
-            <tr>
-                <td class="mon ten"></td>
-                <td class="tues ten"></td>
-                <td class="wed ten"></td>
-                <td class="thurs ten"></td>
-                <td class="fri ten"></td>
-                <td class="sat ten"></td>
-                <td class="sun ten"></td>
-            </tr>
+                        <span class="long">Saturday</span>
+                        <span class="short">Sat</span>
+                    </th>
+                    <th class="heading">
 
-            <tr>
-                <td class="hour" rowspan="2"><span>11:00</span></td>
-                <td class="mon eleven"></td>
-                <td class="tues eleven"></td>
-                <td class="wed eleven"></td>
-                <td class="thurs eleven"></td>
-                <td class="fri eleven"></td>
-                <td class="sat eleven"></td>
-                <td class="sun eleven"></td>
-            </tr>
-            <tr>
-                <td class="mon eleven"></td>
-                <td class="tues eleven"></td>
-                <td class="wed eleven"></td>
-                <td class="thurs eleven"></td>
-                <td class="fri eleven"></td>
-                <td class="sat eleven"></td>
-                <td class="sun eleven"></td>
-            </tr>
+                        <span class="long">Sunday</span>
+                        <span class="short">Sun</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="taskbox mon"></div>
+                    </td>
+                    <td>
+                        <div class="taskbox tues"></div>
+                    </td>
+                    <td>
+                        <div class="taskbox wed"></div>
+                    </td>
+                    <td>
+                        <div class="taskbox thurs"></div>
+                    </td>
+                    <td>
+                        <div class="taskbox fri"></div>
+                    </td>
+                    <td>
+                        <div class="taskbox sat"></div>
+                    </td>
+                    <td>
+                        <div class="taskbox sun"></div>
+                    </td>
 
-            <tr>
-                <td class="hour" rowspan="2"><span>12:00</span></td>
-                <td class="mon twelve"></td>
-                <td class="tues twelve"></td>
-                <td class="wed twelve"></td>
-                <td class="thurs twelve"></td>
-                <td class="fri twelve"></td>
-                <td class="sat twelve"></td>
-                <td class="sun twelve"></td>
-            </tr>
-            <tr>
-                <td class="mon twelve"></td>
-                <td class="tues twelve"></td>
-                <td class="wed twelve"></td>
-                <td class="thurs twelve"></td>
-                <td class="fri twelve"></td>
-                <td class="sat twelve"></td>
-                <td class="sun twelve"></td>
-            </tr>
+                </tr>
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+        <div class="options">
+            <button type="button" class="btn btn-primary btn-large">Add Free Time Slot</button>
+            <button type="button" class="btn btn-warning btn-large">Remove Free Time Slot</button>
+            <div class="expand">
+                <form id="add" style="display:none">
+                    <label for="start">From</label>
+                    <input type="time" id="start" name="start" value="13:00" step="900" />
+                    <label for="end">To</label>
+                    <input type="time" id="end" name="end" value="15:00" step="900" />
+                    <button type="submit"  class="btn btn-primary">Add</button>
+                </form>
+                <form id="remove">
+                    <div class="form-group col-md-4 shadow p-3 mb-5 bg-white rounded">
+                        <select id="inputState" class="form-control">
+                            <option selected>Choose Time Slot</option>
+                        </select>
+                        <button type="submit" class="btn btn-warning">Remove</button>
+                    </div>
+                </form>
+            </div>   
+        </div>
+    </div>
 </body>
 </html>

@@ -13,8 +13,7 @@ http.createServer(function(request, response) {
     var pathname = reqUrl.pathname;
     
     if (request.method === 'GET') {
-        console.log('get');
-        if (pathname == '/query.js') {
+        if (pathname === '/query.js') {
             service.handleQuery(request, response);
         }
         else {
