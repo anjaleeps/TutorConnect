@@ -1,6 +1,7 @@
 const fs = require('fs');
 const db = require('./database.js');
 const url = require('url');
+const qs = require('querystring');
 
 exports.sendFiles = function (request, response) {
     var reqUrl = url.parse(request.url, true);
@@ -74,6 +75,30 @@ exports.handleQuery = function (request, response) {
             break;
         default:
             console.log('Invalid Query');
+           
+    }
+}
+
+exports.handlePost= function(data,response){
+    let params = qs.parse(data);
+    let action = params.action;
+
+    switch (action) {
+        case 'removeTimeslot':
+            db.removeTimeslot(params, function (err, results) {
+                if (err) { console.log(err) }
+                response.end();
+            });
+            break;
+        case 'addTimeslot':
+            db.addTimeslot(params, function (err, results) {
+                if (err) { console.log(err) }
+                response.end();
+            });
+            break;
+        default:
+            console.log('Invalid Query');
+            
     }
 }
 

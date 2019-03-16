@@ -78,18 +78,24 @@
             </tbody>
         </table>
         <div class="options">
-            <button type="button" class="btn btn-primary btn-large">Add Free Time Slot</button>
-            <button type="button" class="btn btn-warning btn-large">Remove Free Time Slot</button>
+            <button type="button" class="btn btn-primary btn-large" onclick=showAdd();>Add Free Time Slot</button>
+            <button type="button" class="btn btn-warning btn-large" onclick=showRemove();>Remove Free Time Slot</button>
             <div class="expand">
-                <form id="add" style="display:none">
-                    <label for="start">From</label>
-                    <input type="time" id="start" name="start" value="13:00" step="900" />
-                    <label for="end">To</label>
-                    <input type="time" id="end" name="end" value="15:00" step="900" />
-                    <button type="submit"  class="btn btn-primary">Add</button>
+                <form id="add" style="display:none" onsubmit="event.preventDefault(); add();">
+                    <div class="form-group col-md-6 shadow p-3 mb-5 bg-white rounded">
+                        <div class="time from">
+                            <label for="start">From</label>
+                            <input type="time" id="start" name="start"/>
+                        </div>
+                        <div class="time to">
+                            <label for="end">To</label>
+                            <input type="time" id="end" name="end"/>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
                 </form>
-                <form id="remove">
-                    <div class="form-group col-md-4 shadow p-3 mb-5 bg-white rounded">
+                <form id="remove" style="display:none" onsubmit="event.preventDefault(); remove();">
+                    <div class="form-group col-md-5 shadow p-3 mb-5 bg-white rounded">
                         <select id="inputState" class="form-control">
                             <option selected>Choose Time Slot</option>
                         </select>

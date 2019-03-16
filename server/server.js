@@ -22,6 +22,15 @@ http.createServer(function(request, response) {
     }
 
     else if (request.method === 'POST') {
+        let data = '';
+        request.on('data', chunk => {
+            data += chunk;
+        });
+        request.on('end', () => {
+            console.log('end');
+            console.log(data);
+            service.handlePost(data,response);
+        });
     }
 
     else if (request.method === 'OPTIONS') {

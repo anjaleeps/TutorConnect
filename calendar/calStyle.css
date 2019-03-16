@@ -63,17 +63,10 @@ table, th,td {
 }
 
 .event {
-    border: 3px outset #f3c5c5;
+    border: 3px outset;
     height: auto;
     padding-top: 10px;
     margin:5px 0px 5px 0px;  
-}
-
-h4,h5,h6{
-    margin-bottom:3px;
-    margin-top:2px;
-    font-size-adjust:inherit;
-    
 }
 
 form {
@@ -89,10 +82,24 @@ form {
     margin-bottom:10px;   
 }
 
-.form-group >button {
-   
+.time{
+    display:inline-block;
+    margin: 20px;
 }
 
+label{
+    font-weight:500;
+    margin-right:10px;
+}
+
+#add button{
+    margin-left:20px;
+    display:block;
+}
+
+#start, #end{
+    border:4px inset;
+}
     /*@media(max-width:27em) {
     thead {
         tr
