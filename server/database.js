@@ -70,3 +70,15 @@ exports.addTimeslot = function (data, callback) {
         
     });
 }
+
+exports.goToProfile = function (requestUrl, callback) {
+    var q = "SELECT * FROM students where firstname = ?";
+    var firstname = requestUrl.query.firstname;
+    console.log(firstname);
+    con.query(q, [firstname], function (err, result) {
+        if (err) { console.log(err) }
+        console.log(result);
+        callback(null, result);
+    });
+
+}
