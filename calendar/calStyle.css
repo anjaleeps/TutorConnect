@@ -1,5 +1,5 @@
 #table_box{
-    width:70%;
+    width:75%;
     margin:10% auto;
 }
 
@@ -52,6 +52,15 @@ tbody td {
         display: block;
     }
 
+    h6, h5 {
+        font-size: 6px;
+        
+    }
+
+    .event h6 {
+        display: none;
+    }
+
 }
 
 table, th,td {
@@ -59,9 +68,10 @@ table, th,td {
     border-collapse: collapse;
 }
 
-.taskbox{
+th{
+    text-align:center;
+    font-weight:500;
 }
-
 .event {
     border: 3px outset;
     height: auto;
@@ -94,12 +104,31 @@ label{
 
 #add button{
     margin-left:20px;
-    display:block;
+    display:block;   
 }
 
 #start, #end{
     border:4px inset;
 }
+
+.alert{
+    margin-top:30px;
+}
+
+h6, h5 {
+    font-size: 11px;
+    margin: 4px;
+}
+
+th, h6 {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+h5 {
+    color: #2b2727;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-weight: 600;
+}
+
     /*@media(max-width:27em) {
     thead {
         tr

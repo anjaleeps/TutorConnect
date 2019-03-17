@@ -101,7 +101,7 @@ exports.handlePost= function(data,response){
         case 'addTimeslot':
             db.addTimeslot(params, function (err, results) {
                 if (err) { console.log(err) }
-                response.end();
+                response.end(results);
             });
             break;
         default:

@@ -71,12 +71,12 @@ function showEvents(type, events) {
 
         if (type == "class") {
             color = colors[j];
-            data = '<div class="event class rounded" style="background-color:' + color + '; border-color:' + color + ';" > <h6>' + start + ' - ' + end + '</h6><h6>' + events[i].subject_name + '</h6>' + events[i].level_name + '</div>';
+            data = '<div class="event class rounded" style="background-color:' + color + '; border-color:' + color + ';" > <h5>' + start + ' - ' + end + '</h5><h6>' + events[i].subject_name + '</h6><h6>' + events[i].level_name + '</h6></div>';
             if (j == colors.length - 1) { j = -1; }
             j++;
         }
         else if (type == "free") {
-            data = '<div class="event free rounded" style="background-color:' + color + '; border-color:' + color + ';" > <h6>' + start + ' - ' + end +'</h6><h6>Free Time Slot</h6></div>';
+            data = '<div class="event free rounded" style="background-color:' + color + '; border-color:' + color + ';" > <h5>' + start + ' - ' + end +'</h5><h6>Free Time Slot</h6></div>';
         }
         
 
@@ -136,7 +136,7 @@ function remove() {
             data: { action: 'removeTimeslot', timeslot: $timeslot, userid:$userId },
             cache: false,
             success: function () {
-                clear();
+                reset();
             },
             error: function (request, err) {
 
@@ -157,25 +157,41 @@ function remove() {
 function add() {
     let $start = $.trim(document.getElementById('start').value);
     let $end = $.trim(document.getElementById('end').value);
-    if (start.length>0 && end.length>0) {
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:8080",
-            data: { action: 'addTimeslot', start: $start, end: $end, userid: $userId },
-            cache: false,
-            success: function () {
-                reset();
-            },
-            error: function (request, err) {
+    let $day = $('#inputDay').find('option:selected').text();
+    if ($start.length > 0 && $end.length > 0 && $day != 'Choose Day') {
+        if ($start < $end) {
+            
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080",
+                data: { action: 'addTimeslot', start: $start, end: $end, day: $day, userid: $userId },
+                cache: false,
+                success: function (result) {
+                   
+                    if (result == 'taken') {
+                        document.getElementById('danger').setAttribute('style', 'visibility:visible');
+                        setTimeout(function () { document.getElementById('danger').setAttribute('style', 'display:none') }, 5000);
+                    }
+                    else if (result == 'added') {
+                        reset();
+                        document.getElementById('success').setAttribute('style', 'visibility:visible')
+                        setTimeout(function () { document.getElementById('success').setAttribute('style', 'display:none') }, 5000);
+                    }
+                },
+                error: function (request, err) {
 
-                alert(err);
-                console.log(err);
-            },
-            done: function () {
-                alert("Done");
-                console.log("Done");
-            }
-        });
+                    alert(err);
+                    console.log(err);
+                },
+                done: function () {
+                    alert("Done");
+                    console.log("Done");
+                }
+            });
+        } else {
+            document.getElementById('warning').setAttribute('style', 'visibility:visible');
+            setTimeout(function () { document.getElementById('warning').setAttribute('style', 'display:none') }, 10000);
+        }
     }
     document.getElementById('add').setAttribute('style', 'display:none;');
 }

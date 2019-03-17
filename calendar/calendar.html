@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="calStyle.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="calStyle.css" rel="stylesheet" />
     <script src="../jquery/jquery.min.js"></script>
     <script src="calendar.js"></script>
 </head>
@@ -82,14 +82,26 @@
             <button type="button" class="btn btn-warning btn-large" onclick=showRemove();>Remove Free Time Slot</button>
             <div class="expand">
                 <form id="add" style="display:none" onsubmit="event.preventDefault(); add();">
-                    <div class="form-group col-md-6 shadow p-3 mb-5 bg-white rounded">
+                    <div class="form-group col-md-9 shadow p-3 mb-5 bg-white rounded">
                         <div class="time from">
                             <label for="start">From</label>
-                            <input type="time" id="start" name="start"/>
+                            <input type="time" id="start" name="start" />
                         </div>
                         <div class="time to">
                             <label for="end">To</label>
-                            <input type="time" id="end" name="end"/>
+                            <input type="time" id="end" name="end" />
+                        </div>
+                        <div class="time day">
+                            <select id="inputDay" class="form-control">
+                                <option selected>Choose Day</option>
+                                <option>Monday</option>
+                                <option>Tuesday</option>
+                                <option>Wednesday</option>
+                                <option>Thursday</option>
+                                <option>Friday</option>
+                                <option>Saturday</option>
+                                <option>Sunday</option>
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Add</button>
                     </div>
@@ -102,6 +114,15 @@
                         <button type="submit" class="btn btn-warning">Remove</button>
                     </div>
                 </form>
+                <div id="success" class="alert alert-success" role="alert" style="display:none">
+                    New free timeslot added successfully!
+                </div>
+                <div id="danger" class="alert alert-danger" role="alert" style="display:none">
+                    This timeslot is already taken!
+                </div>
+                <div id ="warning" class="alert alert-warning" role="alert" style="display:none">
+                    Invalid input
+                </div>
             </div>   
         </div>
     </div>

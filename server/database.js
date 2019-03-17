@@ -60,14 +60,33 @@ exports.removeTimeslot = function (data, callback) {
 }
 
 exports.addTimeslot = function (data, callback) {
+    let answer = true;
     let start = data.start + ':00';
-    let end = data.end + '00';
+    let end = data.end + ':00';
     let day = data.day;
     let userid = data.userid;
-    let classQuery = "SELECT ct.module_id FROM classes AS ct INNER JOIN modules AS mt ON ct.module_id=mt.module_id WHERE mt.tutor_id = ? AND ((? BETWEEN ct.start_time AND ct.end_time) OR (? BETWEEN ct.start_time AND ct.end_time))";
-    con.query(q, [userid, start, end, '%h:%i %p', day], function (err, result) {
-        if (err) {console.log(err)}
-        
+    let classQuery = "SELECT COUNT(ct.module_id) AS num FROM classes AS ct INNER JOIN modules AS mt ON ct.module_id=mt.module_id WHERE mt.tutor_id = ? AND ct.class_day = ? AND ((? BETWEEN ct.start_time AND ct.end_time) OR (? BETWEEN ct.start_time AND ct.end_time))";
+    con.query(classQuery, [userid, day, start, end], function (err, result) {
+        if (err) { console.log(err) }
+        if (result[0].num > 0) {
+            console.log(result);
+            return callback(null, 'taken');
+        }
+        else {
+            let freeQuery = "SELECT COUNT(start_time) AS num FROM free_slots WHERE tutor_id = ? AND ((? BETWEEN start_time AND end_time) OR (? BETWEEN start_time AND end_time)) AND free_day = ?";
+            con.query(freeQuery, [userid, start, end, day], function (err, result) {
+                if (err) { console.log(err) }
+                if (result[0].num > 0) {
+                    return callback(null, 'taken');
+                } else {
+                    let inp = "INSERT INTO free_slots VALUES (?,?,?,?)";
+                    con.query(inp, [userid, start, end, day], function (err, result) {
+                        if (err) { console.log(err) }
+                        return callback(null, 'added');
+                    });
+                }
+            });
+        }
     });
 }
 

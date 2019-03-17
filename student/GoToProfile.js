@@ -5,7 +5,7 @@ function goToProfile(){
         data: {action: 'goToProfile', firstname: $('[name=firstname]').val()},
         cache: false,
         success: function (results) {
-            showResults(results);
+            alert(results);
             console.log("t");
         },
         error: function (request, err) {
