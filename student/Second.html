@@ -8,16 +8,34 @@
     <link href="student/Second.css" rel="stylesheet" />
 </head>
 <body>
+	
     <script src="student/second.js"></script>
-    <div id="container">
+    <div  id="container">
         <h2> Find your Tutor</h2>
-        <div align="center">
-            <form id="search_form" onsubmit="event.preventDefault(); search();">
-                <input type="text" name="homeTown" placeholder="Home Town" />
-                <input name="Search" type="submit" value="Search" />
-            </form>
+        <div id="div1" align="center" class="form-group col-md-5 rounded">
+        	<select onChange="getlevel()" id="level" class="form-control">
+                 <option selected> Level</option>
+            </select>
+         </div>
+         <div class="form-group col-md-5 rounded">
+         <form id="search_form" style="display:none" onsubmit="event.preventDefault(); search();">
+            <select onChange="getsubject()" id="subject" class="form-control">
+                 <option value="">Subject</option>
+            </select>
+            <input type="text" name="homeTown" placeholder="Home Town" />
+           	<input name="Search" type="submit" value="Search" />
+         </form>
+         
         </div>
-        <div id="search_results"></div>
+        <div id='results'></div>
     </div>
+  	<template id="tutordetails">
+  		<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+  			<div class="card-header">Header</div>
+  			<div class="card-body">
+    			<h5 class="card-title">Primary card title</h5>
+ 			</div>
+		</div>	
+	</template>
 </body>
 </html>
