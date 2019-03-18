@@ -15,14 +15,38 @@ con.connect(function (err) {
 
 exports.searchTutors =function(requestUrl,callback) {
     var homeTown = requestUrl.query.homeTown;
-    var q = "SELECT tutor_id,firstname,lastname,picture,rating FROM tutors where area = ?";
-    con.query(q,[homeTown], function (err, result) {
+    var subject = requestUrl.query.subject;
+    var level = requestUrl.query.level;
+        
+    var q = "SELECT tutor_id,firstname,lastname,picture,rating FROM tutors WHERE area=?, subject=?, category=?";
+    con.query(q,[homeTown, subject, level], function (err, result) {
         if (err) { console.log(err) }
         console.log(result);
         callback(null,result);
     });
     
 }
+
+exports.searchlevel = function (requestUrl, callback) {
+    var q = "SELECT categoryname FROM category";
+    con.query(q, function (err, result) {
+        if (err) { console.log(err) }
+        console.log(result);
+        callback(null,result);
+    });
+    
+}
+
+exports.searchsubject = function (requestUrl, callback) {
+	var level = requestUrl.query.category;
+    
+    var q = "SELECT sName FROM subjects WHERE category=?";
+    con.query(q,[level], function (err, result) {
+        if (err) { console.log(err) }
+        console.log(result);
+        callback(null,result);
+    });
+    
 
 
 exports.getCalInfo = function (requestUrl, callback) {
