@@ -26,4 +26,15 @@ input[type="submit"]:hover{
 h2{
 	font-size :60px;
 	margin-top: 150px;
+    margin-bottom:70px;
+}
+.form-group{
+    margin:25px auto;
+}
+input{
+    margin:20px auto;
+}
+
+.card{
+    
 }

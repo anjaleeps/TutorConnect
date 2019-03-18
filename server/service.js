@@ -47,7 +47,7 @@ exports.sendFiles = function (request, response) {
 exports.handleQuery = function (request, response) {
     var queryUrl = url.parse(request.url, true);
     var action = queryUrl.query.action;
-
+    console.log(action);
     switch (action) {
         case 'searchTutors':
             db.searchTutors(queryUrl, function (err, results) {

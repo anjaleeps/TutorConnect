@@ -31,12 +31,12 @@ function show(type, results) {
     old = option.innerHTML;
 	if(type=='level'){
 	   for (i = 0; i < results.length; i++) {
-		   option.innerHTML += "<option>" + results[i].categoryname ;
+		   option.innerHTML += "<option>" + results[i].level_name ;
 		   }
     }
 	else if(type=='subject'){
 		   for (i = 0; i < results.length; i++) {
-			   option.innerHTML += "<option>" + results[i].sName ;
+			   option.innerHTML += "<option>" + results[i].subject_name ;
 			   }
 	    }
 }
@@ -99,14 +99,14 @@ function chosesubject() {
 
 function showResults(type, results) {
     alert(results);
- 
+    var resultList = document.getElementById('results');
     // Loop through each of the comments and add them to the comments list.
     for (var i = 0; i < results.length; i++) {
       var result = results[i];
       var tmpl = document.getElementById('tutordetails').content.cloneNode(true);
       tmpl.querySelector('.card-header').innerText = result.firstname + " "+ result.lastname;
       tmpl.querySelector('.card-title').innerText = result.rating;
-      commentsList.appendChild(tmpl);
+      resultList.appendChild(tmpl);
     }  
     
 }

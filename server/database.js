@@ -18,7 +18,7 @@ exports.searchTutors =function(requestUrl,callback) {
     var subject = requestUrl.query.subject;
     var level = requestUrl.query.level;
         
-    var q = "SELECT tutor_id,firstname,lastname,picture,rating FROM tutors WHERE area=?, subject=?, category=?";
+    var q = "SELECT tt.tutor_id,tt.firstname,tt.lastname,tt.picture,tt.rating FROM tutors AS tt INNER JOIN modules AS mt ON mt.tutor_id=tt.tutor_id INNER JOIN subjects AS st ON st.subject_id=mt.subject_id INNER JOIN levels AS lt ON lt.level_id=mt.level_id WHERE tt.area=? AND st.subject_name=? AND lt.level_name=? ORDER BY tt.rating";
     con.query(q,[homeTown, subject, level], function (err, result) {
         if (err) { console.log(err) }
         console.log(result);
@@ -28,7 +28,7 @@ exports.searchTutors =function(requestUrl,callback) {
 }
 
 exports.searchlevel = function (requestUrl, callback) {
-    var q = "SELECT categoryname FROM category";
+    var q = "SELECT level_name FROM levels";
     con.query(q, function (err, result) {
         if (err) { console.log(err) }
         console.log(result);
@@ -38,15 +38,15 @@ exports.searchlevel = function (requestUrl, callback) {
 }
 
 exports.searchsubject = function (requestUrl, callback) {
-	var level = requestUrl.query.category;
-    
-    var q = "SELECT sName FROM subjects WHERE category=?";
-    con.query(q,[level], function (err, result) {
+    var level = requestUrl.query.category;
+
+    var q = "SELECT st.subject_name FROM modules AS mt INNER JOIN subjects AS st ON st.subject_id=mt.subject_id INNER JOIN levels AS lt ON lt.level_id=mt.level_id WHERE lt.level_name=?";
+    con.query(q, [level], function (err, result) {
         if (err) { console.log(err) }
         console.log(result);
-        callback(null,result);
+        callback(null, result);
     });
-    
+}   
 
 
 exports.getCalInfo = function (requestUrl, callback) {
