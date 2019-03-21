@@ -9,12 +9,12 @@ exports.sendFiles = function (request, response) {
 
     var filename;
     if (pathname == '/') {
-        filename = '../student/Second.html';
+        filename = '../web/index.html';
     }
     else {
-        filename = '..' + pathname;
+        filename = '../web' + pathname;
     }
-
+    console.log(filename);
     fs.readFile(filename, function (err, data) {
         if (!err) {
             var dotoffset = filename.lastIndexOf('.');
@@ -27,7 +27,9 @@ exports.sendFiles = function (request, response) {
                     '.png': 'image/png',
                     '.gif': 'image/gif',
                     '.css': 'text/css',
-                    '.js': 'text/javascript'
+                    '.js': 'text/javascript',
+                    '.svg': 'image/svg+xml',
+                    '.woff2': 'font/woff2'
                 }[filename.substr(dotoffset)];
       
             response.writeHead(200, { 'Content-Type': mimetype });

@@ -2,10 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\calendar",
+    "\\home",
+    "\\home\\pictures",
+    "\\jquery",
     "\\login",
     "\\server",
-    "\\student"
+    "\\student",
+    "\\tutor",
+    "\\web"
   ],
-  "SelectedNode": "\\calendar\\calendar.css",
+  "SelectedNode": "\\web\\styles",
   "PreviewInSolutionExplorer": false
 }
