@@ -6,21 +6,9 @@ body
 }
 .profile-card
 {
-	width: 320px;
-	height: 620px;
 	background: #220066;
     color: #fff;
-	top: 50%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    box-sizing: border-box;
-    padding: 70px 30px;
-
-}
-.image-container
-{
-	position: relative;
+	padding: 70px 30px;
 }
 .info
 {
@@ -31,6 +19,9 @@ body
 {
 	color: #fff;
 	margin-right: 24px;
+}
+div [id="name"]{
+    font-size: 25px;
 }
 p [name="calender"]{
     color: #fff;

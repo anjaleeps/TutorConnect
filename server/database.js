@@ -27,14 +27,15 @@ exports.searchTutors =function(requestUrl,callback) {
     
 }
 
-exports.searchlevel = function (requestUrl, callback) {
-    var q = "SELECT level_name FROM levels";
-    con.query(q, function (err, result) {
+exports.goToProfile = function (requestUrl, callback) {
+    var q = "SELECT * FROM students where student_id = ?";
+    var student_id = requestUrl.query.student_id;
+    con.query(q, [student_id], function (err, result) {
         if (err) { console.log(err) }
         console.log(result);
-        callback(null,result);
+        callback(null, result);
     });
-    
+
 }
 
 exports.searchsubject = function (requestUrl, callback) {
