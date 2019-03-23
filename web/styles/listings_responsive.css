@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 
 /******************************
@@ -280,12 +280,21 @@
 		width: 100%;
 		margin-left: 0;
 	}
+    #results {
+        width: 80%;
+        margin-left: 0;
+    }
 	.listing_box
 	{
 		width: 100%;
 		padding-left: 0;
 		padding-right: 0;
 	}
+    .tcard {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
 	.footer_bar_content
 	{
 		height: auto;

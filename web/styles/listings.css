@@ -948,12 +948,23 @@ section
 	margin-top: 20px;
 	z-index: 1;
 }
+#results {
+    width: calc(100% + 30px);
+    margin: 20px auto;
+    z-index: 1;
+}
+.tcard {
+    display: inline-block;
+    width: calc(100% / 3.1);
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 27px;
+}
+
 .listing_box
 {
-	width: calc(100% / 3);
-	padding-left: 15px;
-	padding-right: 15px;
-	margin-bottom: 27px;
+	
+    display:inline-block;
 }
 .listing
 {
