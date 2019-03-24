@@ -100,6 +100,14 @@ exports.handleQuery = function (request, response) {
                 response.end();
             });
             break;  
+        case 'showProfile':
+            db.showProfile(queryUrl, function (err, results) {
+                if (err) { console.log(err) }
+                response.writeHead(200, { 'Content-Type': 'application/json' });
+                response.write(JSON.stringify(results));
+                response.end();
+            });
+            break;
         default:
             console.log('Invalid Query');
            
