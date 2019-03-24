@@ -22,23 +22,26 @@ function showProfile(){
 }
 
 function showResults(results) {
-    for (i = 0; i<results.length; i++) {
-    	var ID = results[i].ID;
-    	var Name = results[i].Name;
-    	var Area = results[i].Area;
-    	var Qualifications = results[i].Qualifications;
-    	var Rating = results[i].Rating;
-    	var About = results[i].About;
-    	var Subject = results[i].Subject;
-    	var Image = results[i].Image;
-    	var Pnumber = results[i].Pnumber;
-    	var Email = results[i].Email;
+    for (i = 0; i < results.length; i++) {
+        var ID = results[i].ID;
+        var Name = results[i].Name;
+        var Area = results[i].Area;
+        var Qualifications = results[i].Qualifications;
+        var Rating = results[i].Rating;
+        var About = results[i].About;
+        var Subject = results[i].Subject;
+        var Image = results[i].Image;
+        var Pnumber = results[i].Pnumber;
+        var Email = results[i].Email;
     }
 
-    document.getElementById("Name").innerHTML = '<p><b>'+Name+'</b></p>';
-    document.getElementById("About").innerHTML = '<p>'+About+'</p>';
-    document.getElementById("Qualifications").innerHTML = '<p>'+Qualifications+'</p>';
-    document.getElementById("Area").innerHTML = '<p>'+Area+'</p>';
-    document.getElementById("Rating").innerHTML = '<div class="bar" style="width:'+ Rating + '% >'+Rating+'</div>';
-    document.getElementById("Pnumber").innerHTML = '<p>'+Pnumber+'</p>';
-    document.getElementById("Email").innerHTML = '<p>'+Email+'</p>';
+    document.getElementById("Name").innerHTML = Name;
+    document.getElementById("About").innerHTML = '<p>' + About + '</p>';
+    for (i = 0; i < qualifs.length; i++) {
+        document.getElementById("Qualifications").innerHTML += '<p>' + Qualifications + '</p>';
+    }
+    document.getElementById("Area").innerHTML = 'Teaches around' + Area;
+    document.getElementById("Rating").innerHTML = Pnumber;
+    document.getElementById("email").innerHTML = '<p>' + Email + '</p>';
+    document.getElementById("video").setAttribute = video;
+}
