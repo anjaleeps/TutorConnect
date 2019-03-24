@@ -125,3 +125,14 @@ exports.goToProfile = function (requestUrl, callback) {
     });
 
 }
+exports.showProfile = function (requestUrl, callback) {
+    var q = "SELECT * FROM new_table where ID = ?";
+    var ID = requestUrl.query.ID;
+    console.log(ID);
+    con.query(q, [ID], function (err, result) {
+        if (err) { console.log(err) }
+        console.log(result);
+        callback(null, result);
+    });
+
+}
