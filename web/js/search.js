@@ -11,7 +11,6 @@ function search() {
         data: { action: 'searchTutors', homeTown: $('#area').val(), subject: $subject, level: $level },
         cache: false,
         success: function (results) {
-            alert(results);
             showResults("tutor", results);
         },
         error: function (request, err) {
@@ -98,16 +97,37 @@ function chosesubject() {
 }
 
 function showResults(type, results) {
-    alert(results);
+    
     var resultList = document.getElementById('results');
     // Loop through each of the comments and add them to the comments list.
     for (var i = 0; i < results.length; i++) {
         var result = results[i];
         var tmpl = document.getElementById('tutorcard').content.cloneNode(true);
         tmpl.querySelector('.tutor').innerText = result.firstname + " " + result.lastname;
-        tmpl.querySelector('.rating').innerText = result.rating;
+        tmpl.querySelector('.rating').innerHTML = getRating(result.rating);
         resultList.appendChild(tmpl);
     }
+
+}
+
+function getRating(rating) {
+
+    // Round to nearest half
+    rating = Math.round(rating * 2) / 2;
+    let output = [];
+
+    // Append all the filled whole stars
+    for (var i = rating; i >= 1; i--)
+        output.push('<i class="fa fa-star" aria-hidden="true" style="color: gold;"></i>&nbsp;');
+
+    // If there is a half a star, append it
+    if (i == .5) output.push('<i class="fa fa-star-half-o" aria-hidden="true" style="color: gold;"></i>&nbsp;');
+
+    // Fill the empty stars
+    for (let i = (5 - rating); i >= 1; i--)
+        output.push('<i class="fa fa-star-o" aria-hidden="true" style="color: gold;"></i>&nbsp;');
+
+    return output.join('');
 
 }
 
