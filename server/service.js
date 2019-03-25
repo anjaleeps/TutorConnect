@@ -131,6 +131,11 @@ exports.handlePost= function(data,response){
                 response.end(results);
             });
             break;
+        case 'signIn':
+            db.addTimeslot(params, function (err, results) {
+                if (err) { console.log(err) }
+                response.end(results);
+            });    
         default:
             console.log('Invalid Query');
             
