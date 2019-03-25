@@ -10,6 +10,7 @@ function search() {
         url: "http://localhost:8080/query.js",
         data: { action: 'searchTutors', homeTown: $('#area').val(), subject: $subject, level: $level },
         cache: false,
+        document: document.getElementById('results').innerHTML=" ",
         success: function (results) {
             showResults("tutor", results);
         },
@@ -24,20 +25,20 @@ function search() {
         }
     });
 }
-
 function show(type, results) {
-    option = document.getElementById(type);
+	option = document.getElementById(type);
     old = option.innerHTML;
-    if (type == 'level') {
-        for (i = 0; i < results.length; i++) {
-            option.innerHTML += "<option>" + results[i].level_name;
-        }
+	if(type=='level'){
+	   for (i = 0; i < results.length; i++) {
+		   option.innerHTML += "<option>" + results[i].categoryname ;
+		   }
     }
-    else if (type == 'subject') {
-        for (i = 0; i < results.length; i++) {
-            option.innerHTML += "<option>" + results[i].subject_name;
-        }
-    }
+	else if(type=='subject'){
+        option.innerHTML += "<option>" + "subject" ;
+		   for (i = 0; i < results.length; i++) {
+			   option.innerHTML += "<option>" + results[i].sName ;
+			   }
+	    }
 }
 
 function choselevel() {
@@ -69,6 +70,7 @@ function getlevel() {
         url: "http://localhost:8080/query.js",
         data: { action: 'searchsubject', category: $level },
         cache: false,
+        document: document.getElementById('subject').innerHTML="subject",
         success: function (results) {
             show('subject', results);
 
