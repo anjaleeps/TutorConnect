@@ -136,3 +136,14 @@ exports.showProfile = function (requestUrl, callback) {
     });
 
 }
+exports.signIn = function (data, callback) {
+    let firstname = data.firstname;
+    let lastname = data.lastname;
+    let area = data.area;
+    let password = data.password;
+    let q = "INSERT TO firstname WHERE firstname =? ";
+    con.query(q, [firstname, start,'%h:%i %p',end,'%h:%i %p',day], function (err, result) {
+        if (err) { callback(err,null) }
+        callback(null, "success");
+    });
+}
