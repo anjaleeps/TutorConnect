@@ -5,12 +5,12 @@ var $subject;
 $('document').ready(choselevel());
 
 function search() {
+    document.getElementById('results').innerHTML = '';
     $.ajax({
         type: "GET",
         url: "http://localhost:8080/query.js",
         data: { action: 'searchTutors', homeTown: $('#area').val(), subject: $subject, level: $level },
         cache: false,
-        document: document.getElementById('results').innerHTML=" ",
         success: function (results) {
             showResults("tutor", results);
         },
@@ -30,13 +30,13 @@ function show(type, results) {
     old = option.innerHTML;
 	if(type=='level'){
 	   for (i = 0; i < results.length; i++) {
-		   option.innerHTML += "<option>" + results[i].categoryname ;
+		   option.innerHTML += "<option>" + results[i].level_name ;
 		   }
     }
 	else if(type=='subject'){
-        option.innerHTML += "<option>" + "subject" ;
+        
 		   for (i = 0; i < results.length; i++) {
-			   option.innerHTML += "<option>" + results[i].sName ;
+			   option.innerHTML += "<option>" + results[i].subject_name ;
 			   }
 	    }
 }
@@ -63,6 +63,7 @@ function choselevel() {
 }
 
 function getlevel() {
+    document.getElementById('subject').innerHTML = '<option selected>Subject</option>';
     $level = $('#level').find('option:selected').text();
 
     $.ajax({
@@ -70,7 +71,6 @@ function getlevel() {
         url: "http://localhost:8080/query.js",
         data: { action: 'searchsubject', category: $level },
         cache: false,
-        document: document.getElementById('subject').innerHTML="subject",
         success: function (results) {
             show('subject', results);
 
@@ -99,8 +99,11 @@ function chosesubject() {
 }
 
 function showResults(type, results) {
-    
+     
     var resultList = document.getElementById('results');
+    if (results.length == 0) {
+        resultList.innerHTML = '<div class="alert alert-warning" role="alert">0 search ressults found</div>'
+    }
     // Loop through each of the comments and add them to the comments list.
     for (var i = 0; i < results.length; i++) {
         var result = results[i];

@@ -998,6 +998,9 @@ section
 	height: 100%;
 	overflow: hidden;
 }
+.tutor{
+    
+}
 .listing_image_container > img
 {
 	-webkit-transition: all 1600ms ease;

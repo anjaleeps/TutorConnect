@@ -2,10 +2,9 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="calStyle.css" rel="stylesheet" />
-    <script src="../jquery/jquery.min.js"></script>
-    <script src="calendar.js"></script>
+    <link rel="stylesheet" href="styles/bootstrap-4.1.2/bootstrap.min.css">
+    <link href="styles/calStyle.css" rel="stylesheet" />
+    
 </head>
 <body>
     <div id="table_box">
@@ -120,11 +119,14 @@
                 <div id="danger" class="alert alert-danger" role="alert" style="display:none">
                     This timeslot is already taken!
                 </div>
-                <div id ="warning" class="alert alert-warning" role="alert" style="display:none">
+                <div id="warning" class="alert alert-warning" role="alert" style="display:none">
                     Invalid input
                 </div>
-            </div>   
+            </div>
         </div>
     </div>
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/calendar.js"></script>
 </body>
 </html>

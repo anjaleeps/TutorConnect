@@ -29,7 +29,7 @@ $(document).ready(function()
 
 	initMenu();
 	initHomeSlider();
-	
+	initGoogleMap();
 	initTestSlider();
 
 	setHeader();
