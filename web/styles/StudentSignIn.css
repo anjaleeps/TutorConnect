@@ -9,7 +9,7 @@ body{
 }
 .SignInBox{
     width: 350px;
-    height: 560px;
+    height: 520px;
     background: #220066;
     color: #fff;
     top: 50%;
@@ -42,7 +42,7 @@ h1{
     width: 100%;
     margin-bottom: 20px;
 }
-.SignInBox input[type="text"], input[type="password"], input[type="area"]
+.SignInBox input[type="text"], input[type="email"], input[type="password"]
 {
     border: none;
     border-bottom: 1px solid #fff;
