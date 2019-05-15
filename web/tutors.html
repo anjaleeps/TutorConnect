@@ -114,10 +114,10 @@
                                 <form action="#" class="search_form" id="search_form">
                                     <div class="d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start">
                                         <div class="search_inputs d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start">
-                                            <select onChange="getlevel()" id="level" class="search_input" required="required">
+                                            <select onChange="onLevelChange()" id="level" class="search_input" required="required">
                                                 <option selected> Level</option>
                                             </select>
-                                            <select onChange="getsubject()" id="subject" class="search_input" required="required">
+                                            <select id="subject" class="search_input" required="required">
                                                 <option selected>Subject</option>
                                             </select>
                                             <input type="text" id="area" class="search_input" placeholder="Area" required="required">
@@ -203,7 +203,7 @@
                     </div>
                     <div class="listing_content">
                         <div class="prop_location listing_location d-flex flex-row align-items-center justify-content-center">
-                            <a href="single.html" class="tutor" style="font-size:24px;"></a>
+                            <a href="#" id ="profile" class="tutor" style="font-size:24px;"></a>
                         </div>
                         <div class="listing_info d-flex justify-content-center">
                             <div class="rating"></div>

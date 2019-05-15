@@ -1,16 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\calendar",
-    "\\home",
-    "\\home\\pictures",
-    "\\jquery",
-    "\\login",
-    "\\server",
-    "\\student",
-    "\\tutor",
-    "\\web"
+    "\\app",
+    "\\app\\Authorization",
+    "\\app\\Authorization\\Controllers",
+    "\\app\\Authorization\\Middleware",
+    "\\app\\Database",
+    "\\app\\Users",
+    "\\app\\Users\\Students",
+    "\\app\\Users\\Tutors",
+    "\\app\\Users\\Tutors\\Profile"
   ],
-  "SelectedNode": "\\web\\styles",
+  "SelectedNode": "\\app\\Database\\database.js",
   "PreviewInSolutionExplorer": false
 }

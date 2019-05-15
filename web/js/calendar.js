@@ -1,206 +1,317 @@
-//const user = JSON.parse(window.localStorage.getItem('user'));
-//const userid = user.getItem();
-//const userType = user.getType();
-const $userId = 3;
-const userType = 1;
-var freeslots;
 var old;
-var option;
+var tmpl = document.getElementById('calendar_event');
+var colors = ["#39CCCC", "#3D9970", "#F012BE", "#2ECC40", "#FF4136", "#25E84C", "#F76B38"];
+var class_list;
+var freeSlot_list;
 
-$('document').ready(getClasses());
-$('document').ready(getFreeslots());
+var $user;
+var $userId;
+var $type;
+var $calendar;
+var $session;
 
-function getClasses() {    
+var $add = document.getElementById('add');
+var $remove = document.getElementById('remove');
+var $option = document.getElementById('inputState');
+var taskbox = document.getElementsByClassName('taskbox');
+
+$('document').ready(function () {
+    class_list = [];
+    freeSlot_list = [];
+    $session = JSON.parse(localStorage.getItem('user'));
+    $user = JSON.parse(sessionStorage.getItem('profile'));
+    $userId = $user.id;
+    $type = $user.type;
+
+    var token = localStorage.getItem('accessToken');
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/query.js",
-        data: { action: 'getCalInfo', userid: $userId},
+        url: "http://localhost:8080/Info/User/Calendar",
+        data: { userId: $userId, type: $type },
+        headers: { 'Authorization': token },
         cache: false,
-        success: function (events) {
-            showEvents("class",events);
+        success: function (result, status, response) {
+            var token = response.getResponseHeader('Authorization');
+            window.localStorage.setItem('accessToken', token);
+            setCalendar(result);
         },
         error: function (request, err) {
-
-            alert(err);
             console.log(err);
-        },
-        done: function () {
-            alert("Done");
-            console.log("Done");
         }
     });
-} 
 
-function getFreeslots() {
-    $.ajax({
-        type: "GET",
-        url: "http://localhost:8080/query.js",
-        data: { action: 'getFreeSlots', userid: $userId },
-        cache: false,
-        success: function (events) {
-            freeslots = events;
-            showEvents("free",events);
-        },
-        error: function (request, err) {
-
-            alert(err);
-            console.log(err);
-        },
-        done: function () {
-            alert("Done");
-            console.log("Done");
-        }
-    });
-}
-
-$(document).ready(function () {
-
+    if ($session && $session.id == $userId && $user.type == 2) {
+        $('.user').show();
+    }
 });
 
-function showEvents(type, events) {
-    
-    var colors = ["#39CCCC", "#3D9970", "#F012BE", "#2ECC40", "#FF4136", "#25E84C", "#F76B38"];
-    var color = "#D7F738";
-    var j = 0;
-    var data;
+function setCalendar(result) {
+    if ($type == 1) {
+        $calendar = {
+            userId: result.userId,
+            classes: result.classes,
+        }
+    }
+    else if ($type == 2) {
+        $calendar = {
+            userId: result.userId,
+            classes: result.classes,
+            freeSlots: result.freeSlots
+        }
+    }
+    $user['calendar'] = $calendar;
 
-    for (i = 0; i < events.length; i++) {
-        var date = events[i].weekday;
-        var start = events[i].start_time
-        var end = events[i].end_time;
+    showCalendar;
+}
 
-        if (type == "class") {
-            color = colors[j];
-            data = '<div class="event class rounded" style="background-color:' + color + '; border-color:' + color + ';" > <h5>' + start + ' - ' + end + '</h5><h6>' + events[i].subject_name + '</h6><h6>' + events[i].level_name + '</h6></div>';
-            if (j == colors.length - 1) { j = -1; }
-            j++;
-        }
-        else if (type == "free") {
-            data = '<div class="event free rounded" style="background-color:' + color + '; border-color:' + color + ';" > <h5>' + start + ' - ' + end +'</h5><h6>Free Time Slot</h6></div>';
-        }
-        
+function showCalendar() {
 
-        
-        /*if (userType == 1) {
-            data += '<h5>' + events[i].ttr_name + '<h5></div>';
-        }
-        if (userType == 2) {
-            data += '<h5>' + events[i].stu_name + '<h5></div>';
-        }*/
+    showClasses($calendar.classes);
+    if ($type === 2) {
+        showFreeSlots($calendar.freeSlots);
+    }
+    //sessionStorage.setItem('profile', JSON.stringify($user));
 
-        if (date == "Monday") {
-            document.getElementsByClassName("mon")[0].innerHTML += data;
+}
+
+function showClasses(classes) {
+    j = 0;
+    for (i = 0; i < classes.length; i++) {
+        var new_class = {
+            tutor: classes[i].tutor,
+            student: classes[i].student,
+            level: classes[i].level,
+            subject: classes[i].subject,
+            starttime: classes[i].starttime,
+            endtime: classes[i].endtime,
+            day: classes[i].day
         }
-        else if (date == "Tuesday") {
-            document.getElementsByClassName("tues")[0].innerHTML += data;
+
+        class_list.push(new_class);
+        color = colors[j];
+        if (j == colors.length - 1) { j = -1; }
+        j++;
+
+        var newCard = tmpl.content.cloneNode(true);
+        var event = newCard.querySelector('.event');
+        event.setAttribute(style, 'background-color:' + color);
+        event.setAttribute(style, 'border-color:' + color);
+
+        newCard.querySelector('.time').innerHTML = '<h6>' + new_class.starttime + ' - ' + new_class.endtime + '</h6>';
+        newCard.querySelector('.subject').innerHTML = '<h6>' + new_class.subject + '</h6>';
+        newCard.querySelector('.level').innerHTML = '<h6>' + new_class.level + '</h6>';
+        showEvent(new_class.day, newCard);
+    }
+    $calendar.classes = class_list;
+}
+
+function showFreeSlots(freeSlots) {
+
+    for (i = 0; i < freeSlots.length; i++) {
+        var freeSlot = {
+            starttime: freeSlots[i].starttime,
+            endtime: freeSlots[i].endtime,
+            day: freeSlots[i].day
         }
-        else if (date == "Wednesday") {
-            document.getElementsByClassName("wed")[0].innerHTML += data;
-        }
-        else if (date == "Thursday") {
-            document.getElementsByClassName("thurs")[0].innerHTML += data;
-        }
-        else if (date == "Friday") {
-            document.getElementsByClassName("fri")[0].innerHTML += data;
-        }
-        else if (date == "Saturday") {
-            document.getElementsByClassName("sat")[0].innerHTML += data;
-        }
-        else if (date == "Sunday") {
-            document.getElementsByClassName("sun")[0].innerHTML += data;
-        }       
+        freeSlots_list.push(freeSlot);
+
+        color = "#D7F738";
+
+        var newCard = tmpl.content.cloneNode(true);
+        var event = newCard.querySelector('.event');
+        event.setAttribute(style, 'background-color:' + color);
+        event.setAttribute(style, 'border-color:' + color);
+
+        newCard.querySelector('.free_slot').innerHTML = '<h6>Free Time Slot</h6>';
+        newCard.querySelector('.time').innerHTML = '<h6>' + freeSlot.starttime + ' - ' + freeSlot.endtime + '</h6>';
+        showEvent(day, newCard);
+    }
+    $calendar.freeSolts = freeSlots_list;
+}
+
+function showEvent(day, newCard) {
+
+    if (day == "Monday") {
+        document.getElementsByClassName("mon")[0].appendChild(newCard);
+    }
+    else if (day == "Tuesday") {
+        document.getElementsByClassName("tues")[0].appendChild(newCard);
+    }
+    else if (day == "Wednesday") {
+        document.getElementsByClassName("wed")[0].appendChild(newCard);
+    }
+    else if (day == "Thursday") {
+        document.getElementsByClassName("thurs")[0].appendChild(newCard);
+    }
+    else if (day == "Friday") {
+        document.getElementsByClassName("fri")[0].appendChild(newCard);
+    }
+    else if (day == "Saturday") {
+        document.getElementsByClassName("sat")[0].appendChild(newCard);
+    }
+    else if (day == "Sunday") {
+        document.getElementsByClassName("sun")[0].appendChild(newCard);
     }
 }
 
 function showRemove() {
-    document.getElementById('add').setAttribute('style', 'display:none;');
-    document.getElementById('remove').setAttribute('style', 'visibility:visible;');
-    option = document.getElementById('inputState');
+    $('#add').hide();
+    $('#remove').show();
+
     old = option.innerHTML;
-    for (i = 0; i < freeslots.length; i++) {
-        option.innerHTML += "<option>" + freeslots[i].weekday + " " + freeslots[i].start_time + " - " + freeslots[i].end_time;
+    for (i = 0; i < freeSlot_list.length; i++) {
+        option.innerHTML += '<option id="freeSlot' + i + '">' + freeSlot_list[i].day + " " + freeSlot_list[i].starttime + " - " + freeSlot_list[i].endtime;
     }
 }
 
 function showAdd() {
-    document.getElementById('remove').setAttribute('style', 'display:none;');
-    document.getElementById('add').setAttribute('style', 'visibility:visible;');
+    $('#add').show();
+    $('#remove').hide();
 }
 
-function remove() {
-    let $timeslot = $('#inputState').find('option:selected').text();
-    if ($timeslot != 'Choose Time Slot') {
+function remove(e) {
+    e.preventDefault();
+
+    var $selected = $('#inputState').find('option:selected');
+    if ($selected != 'Choose Time Slot') {
+        var $timeslotId = parseInt($selected.attr("id").substr(8));
+        var $timeslot = freeSlot_list[$timeslotId];
+        var $newClass = {
+
+        }
+
+        var token = localStorage.getItem('accessToken');
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080",
-            data: { action: 'removeTimeslot', timeslot: $timeslot, userid:$userId },
+            url: "http://localhost:8080/Users/Calendar/Tutor/Update",
+            data: { action: 'remove', timeslot: $timeslot, userId: $sessionId },
             cache: false,
-            success: function () {
+            headers: { 'Authorization': token },
+            success: function (result, status, response) {
+                var token = response.getResponseHeader('Authorization');
+                window.localStorage.setItem('accessToken', token);
+                freeSlot_list.splice($timeslotId, 1);
                 reset();
             },
             error: function (request, err) {
-
-                alert(err);
+                console.log(err);
                 console.log(err);
             },
-            done: function () {
-                alert("Done");
-                console.log("Done");
-            }
         });
+
+        $('#remove').hide();
+        option.innerHTML = old;
+
     }
-    document.getElementById('remove').setAttribute('style', 'display:none;');
-    option.innerHTML = old;
-    return false;
 }
 
-function add() {
-    let $start = $.trim(document.getElementById('start').value);
-    let $end = $.trim(document.getElementById('end').value);
-    let $day = $('#inputDay').find('option:selected').text();
-    if ($start.length > 0 && $end.length > 0 && $day != 'Choose Day') {
-        if ($start < $end) {
-            
-            $.ajax({
-                type: "POST",
-                url: "http://localhost:8080",
-                data: { action: 'addTimeslot', start: $start, end: $end, day: $day, userid: $userId },
-                cache: false,
-                success: function (result) {
-                   
-                    if (result == 'taken') {
-                        document.getElementById('danger').setAttribute('style', 'visibility:visible');
-                        setTimeout(function () { document.getElementById('danger').setAttribute('style', 'display:none') }, 5000);
-                    }
-                    else if (result == 'added') {
-                        reset();
-                        document.getElementById('success').setAttribute('style', 'visibility:visible')
-                        setTimeout(function () { document.getElementById('success').setAttribute('style', 'display:none') }, 5000);
-                    }
-                },
-                error: function (request, err) {
+function add(e) {
+    e.preventDefault();
+    try {
+        var $start = $.trim($('#start').val());
+        var $end = $.trim($('#end').val());
+        var $day = $('#inputDay').find('option:selected').text();
 
-                    alert(err);
-                    console.log(err);
-                },
-                done: function () {
-                    alert("Done");
-                    console.log("Done");
-                }
-            });
-        } else {
-            document.getElementById('warning').setAttribute('style', 'visibility:visible');
-            setTimeout(function () { document.getElementById('warning').setAttribute('style', 'display:none') }, 10000);
+        if ($start.length > 0 && $end.length > 0 && $day != 'Choose Day') {
+            var $newFreeSlot = {
+                starttime: convertTimeFormat($start),
+                endtime: convertTimeFormat($end),
+                day: $day
+            }
+            if (validateAdd($newFreeSlot)) {
+                var token = localStorage.getItem('accessToken');
+
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/Users/Tutor/Calendar/Update",
+                    data: { action: 'add', timeslot: JSON.stringify($newFreeSlot) },
+                    headers: { 'Authorization': token },
+                    cache: false,
+                    success: function (result, status, response) {
+                        var token = response.getResponseHeader('Authorization');
+                        localStorage.setItem('accessToken', token);
+                        reset();
+                        $('#success').show();
+                        $('#success').delay(1000).hide();
+                    },
+                    error: function (request, err) {
+
+                        console.log(err);
+                    },
+                });
+            }
         }
+        $('#add').hide();
+    } catch (err) {
+        console.log(err);
     }
-    document.getElementById('add').setAttribute('style', 'display:none;');
 }
 
 function reset() {
-    let taskbox = document.getElementsByClassName('taskbox');
+
     for (i = 0; i < taskbox.length; i++) {
         taskbox[i].innerHTML = "";
     }
-    getClasses();
-    getFreeslots();
+    showClasses();
+    showFreeSlots();
+}
+
+function convertTimeFormat(time) {
+    var parts = time.split(':');
+    var H = parseInt(parts[0]);
+    var h = H % 12 || 12;
+    var ampm = (H < 12 || H === 24) ? "AM" : "PM";
+    var timeString = ("0" + h).slice(-2) + ':' + parts[1] + ' ' + ampm;
+    return timeString;
+}
+
+function getDate(timeStr) {
+    var parts = timeStr.split(/: /);
+    var hour = parseInt(parts[0]);
+    var h = (parts[2] == 'PM' && hour !== 12) ? hour + 12 : hour;
+    var date = new Date(00, 00, 00, hour, parts[1]);
+    return date;
+}
+
+function validateAdd(newFreeSlot) {
+    var newstart = getDate(newFreeSlot.starttime);
+    var newend = getDate(newFreeSlot.endtime);
+    if (newstart > newend) {
+        $('#warning').show();
+        $('#warning').delay(1000).hide();
+        return false;
+    }
+    for (i = 0; i < freeSlot_list.length; i++) {
+        var start = getDate(freeSlot_list[i].starttime);
+        var end = getDate(freeSlot_list[i].endtime);
+        if (newstart > start && newstart < end) {
+            reset();
+            $('#danger').show();
+            $('#danger').delay(1000).hide();
+            return false;
+        }
+        else if (newend > start && newend < end) {
+            reset();
+            $('#danger').show();
+            $('#danger').delay(1000).hide();
+            return false;
+        }
+    }
+    for (i = 0; i < class_list.length; i++) {
+        var start = getDate(class_list[i].starttime);
+        var end = getDate(class_list[i].endtime);
+        if (newstart > start && newstart < end) {
+            reset();
+            $('#danger').show();
+            $('#danger').delay(1000).hide();
+            return false;
+        }
+        else if (newend > start && newend < end) {
+            reset();
+            $('#danger').show();
+            $('#danger').delay(1000).hide();
+            return false;
+        }
+    }
+    return true;
 }

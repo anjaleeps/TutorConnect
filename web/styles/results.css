@@ -1,0 +1,20 @@
+#requests_list{
+    margin-top:100px;
+    margin-left:50px;
+    min-height:100px;
+}
+
+#request_card {
+    margin-bottom: 50px;
+    padding: 20px 20px 20px 20px;
+    height: 80px;
+   
+}
+
+.name {
+    display: inline;
+}
+
+.card_options{    
+   
+}

@@ -1,27 +1,38 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Login Form</title>
-    <link rel="stylesheet" type="text/css" href="styles/signIn.css">
-    <script src="js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/signIn.css">
+    
 </head>
 <body>
-<div class="SignInBox">
-    <img src="login2.jpg" class="signIn">
-    <h1>Register</h1>
-    <form>
-        <p>First Name</p>
-        <input type="text" id="firstname" placeholder="Enter First Name">
-        <p>Last Name</p>
-        <input type="text" id="lastname" placeholder="Enter Last Name">
-        <p>Password</p>
-        <input type="password" id="password" placeholder="Enter Password">
-        <p>Area</p>
-        <input type="area" id="area" placeholder="Enter Area">
-        <input type="submit" name="" value="Submit" onclick="signIn()">
-        <script src="js/signIn.js"></script>
-    </form>
-</div>
+
+    <div class="SignInBox">
+        <div class="options">
+            <button type="button" class="type btn btn-secondary btn-block btn-lg mt-5" onclick="getType(1)">Become a Student</button>
+            <button type="button" class="type btn btn-secondary btn-block btn-lg" onClick="getType(2)">Become a Tutor</button>
+        </div>
+        <div class="signIn" style="display:none">
+            <img src="images/login2.jpg" class="signIn">
+            <h1>Register</h1>
+            <form id="signinForm" action="Users/Signin">
+                <label for="firstname">First Name</label>
+                <input type="text" name="firstname" placeholder="Enter First Name">
+                <label for="lastname">Last Name</label>
+                <input type="text" name="lastname" placeholder="Enter Last Name">
+                <label for="password">Password</label>
+                <input type="password" name="password" placeholder="Enter Password">
+                <label for="area">Area</label>
+                <input type="text" name="area" placeholder="Enter Area">
+                <input type="submit" value="Submit">
+                <script src="js/signIn.js"></script>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/signIn.js"></script>
 </body>
 </html>
