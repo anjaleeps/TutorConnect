@@ -12,19 +12,29 @@ $('document').ready(function () {
 function showLoggedinBar() {
     $('#username').html(' '+user.firstname);
     if (user.type == 1) {
-        $('#clzes').attr('href', 'student_classes.html');
+        //$('#clzes').attr('href', 'student_classes.html');
     }
     else if (user.type == 2) {
         $('#prof').show();
         $('#req').show();
         $('#prof').attr('href', 'single-tutor.html');
-        $('#clzes').attr('href', 'classes.html');
+        //$('#clzes').attr('href', 'classes.html');
     }
 }
 
 $('#cal').on('click', function () {
     localStorage.removeItem('profile');
     window.location.href = "http://localhost:8080/calendar.html";
+});
+
+$('#clzes').on('click', function () {
+    localStorage.removeItem('profile');
+    if (user.type == 1) {
+        window.location.href = "http://localhost:8080/student_classes.html";
+    }
+    else if (user.type == 2) {
+        window.location.href = "http://localhost:8080/classes.html";
+    }
 });
 
 $('#logout').on('click', function () {

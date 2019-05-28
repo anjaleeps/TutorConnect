@@ -281,22 +281,27 @@ function getDate(timeStr) {
 function validateAdd(newFreeSlot) {
     var newstart = getDate(newFreeSlot.starttime);
     var newend = getDate(newFreeSlot.endtime);
+    var newDay = newFreeSlot.day;
     if (newstart > newend) {
         $('#warning').show().hide(5000);
         return false;
     }
     for (i = 0; i < freeSlot_list.length; i++) {
         if (freeSlot_list[i] !== null) {
-            var start = getDate(freeSlot_list[i].starttime);
-            var end = getDate(freeSlot_list[i].endtime);
-            if (newstart > start && newstart < end) {
-                $('#danger').show().hide(5000);
-                return false;
+            var day = freeSlot_list[i].day;
+            if (newDay === day) {
+                var start = getDate(freeSlot_list[i].starttime);
+                var end = getDate(freeSlot_list[i].endtime);
+                if (newstart > start && newstart < end) {
+                    $('#danger').show().hide(5000);
+                    return false;
+                }
+                else if (newend > start && newend < end) {
+                    $('#danger').show().hide(5000);
+                    return false;
+                }
             }
-            else if (newend > start && newend < end) {
-                $('#danger').show().hide(5000);
-                return false;
-            }
+           
         }
     }
     for (i = 0; i < class_list.length; i++) {

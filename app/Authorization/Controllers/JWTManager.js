@@ -29,18 +29,11 @@ exports.verifyToken = function (req, res) {
         try {
             req.access_token = jwt.verify(token, publicKey, options);
         } catch (err) {
-            console.log("d"+req.access_token);
-            if (err.name === 'TokenExpiredError') {
-                var payload = jwt.verify(token, publicKey, { ignoreExpiration: true });
-                var token = jwt.sign(payload, privateKey, options);
-                req.access_token = jwt.verify(token, publicKey, options);
-
-            } else {
-                res.statusCode = 400;
-                res.end();
-            }
-
+            res.statusCode = 500;
+            res.end();
         }
+
     }
 }
+
 

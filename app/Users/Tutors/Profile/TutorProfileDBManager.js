@@ -66,16 +66,23 @@ exports.addRating = function (tutorId, studentId, rating, callback) {
                 if (!err && result.length == 1) {
                     var old_rating = result[0].rating;
                     var old_rated = result[0].rated;
+                    console.log(old_rating);
+                    console.log(old_rated);
+                    console.log(parseInt(rating));
+                    console.log(prevRate);
+
                     if (prevRate == 0) {
-                        var new_rating = (old_rating * old_rated + rating) / (old_rated + 1);
+                        var new_rating = (old_rating * old_rated + parseInt(rating)) / (old_rated + 1);
                         var new_rated = old_rated + 1;
                     } else {
-                        var new_rating = (old_rating * old_rated + rating - prevRate) / (old_rated);
+                        var new_rating = (old_rating * old_rated + parseInt(rating) - prevRate) / (old_rated);
                         var new_rated = old_rated;
                     }
-
+                    console.log(old_rating * old_rated)
                     var query = "UPDATE tutors SET rating=?, rated=? WHERE tutor_id=?";
+                    console.log(new_rating, new_rated, tutorId);                   
                     db.query(query, [new_rating, new_rated, tutorId], function (err, result) {
+               
                         callback(err, result);
 
                         var query = "INSERT INTO ratings VALUES (?,?,?) ON DUPLICATE KEY UPDATE rate=?";

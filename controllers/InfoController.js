@@ -44,7 +44,7 @@ exports.handleRequest = function (request, response) {
         });
         request.on('end', () => {
             let params = qs.parse(data);
-            console.log(data);
+            console.log('jdh',data);
             for(key in params) {
                 //console.log(key);
             }
