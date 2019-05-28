@@ -1,0 +1,49 @@
+#requests_list, #classes_list, #ended_classes_list{
+    margin-top:50px;
+    margin-left:50px;
+    min-height:200px;
+}
+
+#request_card {
+    margin-bottom: 50px;
+    padding: 20px 20px 20px 20px;
+    height: 80px;
+    background-color: beige;
+   
+}
+
+#class_card{
+    margin-bottom: 50px;
+    padding: 20px 20px 20px 20px;
+    height: 170px;
+    background-color: beige;
+}
+
+.clz_info{
+    margin-left:10%;
+}
+
+.card-title{
+    margin-bottom:20px;
+}
+.clz_info h5{
+    margin-bottom: 10px;
+    color:rgb(68, 66, 66);
+    font-weight:400;
+}
+
+.modal-body select{
+    margin-bottom:10px;
+}
+
+#no_clz, #no_req{
+    display: none;
+}
+
+#stars{
+    margin:0px auto;
+}
+
+#ended_classes h4, #started_classes h4{
+    margin-left:20px;
+}

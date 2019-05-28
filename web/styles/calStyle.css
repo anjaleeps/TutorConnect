@@ -1,0 +1,177 @@
+table {
+    width:80%;
+    font-family: sans-serif;
+    margin: 10px auto;
+    min-height: 130px;
+    border-spacing: 0;
+    border-collapse: separate;
+    table-layout: fixed;
+    margin-bottom: 50px;
+    overflow-x: scroll;
+}
+
+.heading th {
+    color: sandybrown;
+    padding: 0.3em;
+    overflow:hidden;
+    font-size: 100%;
+}
+
+thead th {
+    height: 50px;
+    background-color:ghostwhite;
+}
+
+.short {
+    display: none;
+}
+
+tbody tr {
+    background-color: white;
+}
+
+tbody td {
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    height: 32px;
+    cursor: pointer;
+}
+
+@media(max-width:60em) {
+
+    .long {
+        display: none;
+    }
+
+    .short {
+        display: block;
+    }
+
+    h6, h5 {
+        font-size: 6px;
+        
+    }
+
+
+
+}
+
+table, th,td {
+    border: 1px solid grey;
+    border-collapse: collapse;
+}
+
+th{
+    text-align:center;
+    font-weight:500;
+}
+.event {
+    border: 3px outset;
+    height: auto;
+    padding-top:5px;
+    margin:5px 0px 5px 0px;  
+}
+.event h6 {
+    margin:0px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+form {
+    margin: 30px 0px;
+   
+}
+
+.form-group {
+    padding: 30px 30px; 
+}
+
+.form-group select,button{
+    margin-bottom:10px;  
+}
+#inputDay, #inputState{
+    height:auto;
+}
+.options{
+    margin-left:10%;
+}
+.time{
+    display:inline-block;
+    margin: 20px;
+}
+
+label{
+    font-weight:500;
+    margin-right:10px;
+}
+
+#add button{
+    margin-left:20px;
+      
+}
+
+#start, #end{
+    border:4px inset;
+}
+
+.alert{
+    margin-top:30px;
+}
+
+h6 {
+    font-size: 12px;
+}
+
+th{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.user{
+    display:none;
+}
+
+#add, #remove {
+    display: none;
+}
+
+    /*@media(max-width:27em) {
+    thead {
+        tr
+
+{
+    th
+
+    font-size: 1.2em;
+{
+    font-size: 65%;
+    .day
+
+{
+    display: block;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin: 0 auto 5px;
+    padding: 5px;
+    &.active
+
+{
+    background: @light;
+    color: @blue;
+}
+
+
+
+tbody {
+    tr{
+        td{
+            &.hour{
+                font-size: 1.7em;
+                span{
+                    transform: translateY(16px)rotate(270deg);
+                    -webkit-transform: translateY(16px)rotate(270deg);
+                    -moz-transform: translateY(16px)rotate(270deg);
+                }
+
+    }
+*/

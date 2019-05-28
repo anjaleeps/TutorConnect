@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Profile</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="myHOME - real estate template project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="styles/single.css">
+    <link rel="stylesheet" type="text/css" href="styles/single_responsive.css">
+</head>
+
+<body>
+    <div class="modal fade" id="pict" tabindex="-1" role="dialog" aria-labelledby="newPictureLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirm request remove</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="remove(event);">Confirm ignore</button>
+                </div>
+            </div>
+        </div>
+    </div>        
+
+    <div class="super_container" data-user-profile="false">
+        <div class="super_overlay"></div>
+
+        <!-- Header -->
+
+
+        <header class="header">
+
+            <!-- Header Bar -->
+            <div class="header_bar d-flex flex-row align-items-center justify-content-start">
+
+                <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
+                    
+                    <div class="log_reg log_reg_prev d-flex flex-row align-items-center justify-content-start" >
+                        <div id="login">
+                            <ul class="d-flex flex-row align-items-start justify-content-start" >
+                                <li><a href="login.html">Login</a></li>
+                                <li><a href="signinSelect.html">Register</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="log_reg log_reg_after d-flex flex-row align-items-center justify-content-start" >
+                            <ul id=logged_in style="display:none;">
+                                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user" id="username">&nbsp</span> </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#" id="prof" style="display:none"><span class="glyphicon glyphicon-home">&nbsp</span>Profile</a></li>
+                                        <li><a href="#" id="cal"><span class="glyphicon glyphicon-calendar">&nbsp</span>Calendar</a></li>
+                                        <li><a href="requests.html" style="display:none;" id="req"><span class="glyphicon glyphicon-phone">&nbsp</span>Requests</a></li>
+                                        <li><a href="#" id="clzes"><span class="glyphicon glyphicon-education">&nbsp</span>Classes</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#" id="logout"><span class="glyphicon glyphicon-off">&nbsp</span>Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                </div>
+            </div>
+
+            <!-- Header Content -->
+            <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                <div class="logo"><a href="#">tutor<span>Connect</span></a></div>
+                <nav class="main_nav">
+                    <ul class="d-flex flex-row align-items-start justify-content-start">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About us</a></li>
+                        <li class="active"><a href="tutors.html">Tutors</a></li>
+
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="hamburger ml-auto"><i class="fa fa-bars" aria-hidden="true"></i></div>
+            </div>
+
+        </header>
+
+        <!-- Menu -->
+
+        <div class="menu text-right">
+            <div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+            <div class="menu_log_reg">
+                <div class="log_reg d-flex flex-row align-items-center justify-content-end">
+                    <ul class="d-flex flex-row align-items-start justify-content-start">
+                        <li><a href="#">Login</a></li>
+                        <li><a href="#">Register</a></li>
+                    </ul>
+                </div>
+                <nav class="menu_nav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About us</a></li>
+                        <li><a href="tutors.html">Tutors</a></li>
+
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+
+        <!-- Home -->
+
+        <div class="home">
+            <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/listings.jpg"
+                data-speed="0.8"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="home_content text-center">
+                            <div class="home_title" >
+                                <span id="name"></span>
+                                <span> <a id="opts" class="ml-2" data-toggle="collapse" href="" aria-expanded="false" aria-controls="newArea">
+                                <i class="fa fa-pencil" aria-hidden="true" onclick="editName(event);" style="font-size:20px; color:lightgrey;"></i></a></span> 
+                            </div>                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Listing -->
+
+        <div class="listing_container">
+
+                <nav class="pages nav nav-pills flex-column flex-sm-row">
+                        <a class="flex-sm-fill text-sm-center nav-link active" id="profile" href="#">Profile</a>
+                        <a class="flex-sm-fill text-sm-center nav-link" id="calendar" href="calendar.html">Calendar</a>
+                        <a class="flex-sm-fill text-sm-center nav-link" id="requests" href="#">Student Requests</a>
+                        <a class="flex-sm-fill text-sm-center nav-link" id ="classes" href="#">Classes</a>
+                </nav>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+
+                        <!-- About -->
+                        <div class="about">
+                            <div class="row">
+                               
+                                <div class="col-lg-6">
+                                    <div class="col-lg-12">
+                                        <div class="listing_features">
+                                            <div id="rates" >
+                                                <span id="rating"></span>
+                                                <span id="rated"></span>
+                                            </div>                        
+    
+                                            <div>
+                                                <div class="d-flex flex-row align-items-center justify-content-start">
+                                                    <i class="fa fa-map-marker mr-3" style="font-size:24px;"></i>
+                                                    Teaches around&nbsp;<span id="area"></span>
+                                                    <span> <a class="ml-5" data-toggle="collapse" href="#newArea" aria-expanded="false" aria-controls="newArea"><i class="fa fa-pencil" aria-hidden="true" style="font-size:20px;"></i></a></span>                          
+                                                </div>
+                                                <div class="collapse multi-collapse mt-1" id="newArea">
+                                                    <div class="card-body">
+                                                        <div class="modal-body">
+                                                            <input class="col-sm-4" type="text" id="area_text" placeholder="enter area"></input>
+                                                            <button class="col-sm-2 btn btn-primary btn-sm ml-2 p-1" id="area_add" onclick="changeArea(event);">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </div>                                       
+    
+                                            </div>                                    
+                                        </div>
+    
+                                    </div>
+
+                                    
+                                    <div class="col-lg-12">
+                                        <div class="listing_features">
+                                            <div class="listing_title">
+                                                <h3>Subjects</h3>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                    <ul id="modules">
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            
+                                            <a class="ml-5" data-toggle="collapse" href="#newModule" aria-expanded="false" aria-controls="newModule">
+                                                <i class="fa fa-plus-circle mt-3" aria-hidden="true" style="font-size:20px;"></i></a>
+                                            <div class="collapse multi-collapse mt-2" id="newModule">
+                                                <div class="card-body">
+                                                    <div>
+                                                        <select id="level" class="form-control mb-2" style="height:auto">
+                                                                <option selected>Choose Level</option>
+                                                        </select>
+                                                        <select id="subject" class="form-control" style="height:auto">
+                                                                <option selected>Choose Subject</option>
+                                                        </select>
+                                                        <button class="col-sm-2 btn btn-primary btn-sm mt-1 float-right" id="module_add" onclick="addNewModule(event); ">Add</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                               
+    
+
+                                    <div class="col-lg-12">
+
+                                        <div class="listing_features">
+    
+                                            <div class="listing_title">
+                                                <h3>Comments</h3>
+                                            </div>
+                                            
+                                            <div class="row col-lg-12">
+                                                <div>
+                                                    <div id="comments"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+            
+                                </div>
+                                
+                                
+                                <div  class="col-lg-6">
+
+                                    <div class="col-lg-12">
+                                        <div class="listing_features">
+                                            <div class="about_text p-4">
+                                                <div class=picture style="display:none">
+    
+                                                    <div class="circle">
+                                                        <!-- User Profile Image -->
+                                                        <img class="profile-pic" id="image" src="images/user.png">
+                                                
+                                                        <!-- Default Image -->
+                                                        <!-- <i class="fa fa-user fa-5x"></i> -->
+                                                    </div>
+                                                    <div class="p-image">
+                                                        <i class="fa fa-camera upload-button" style="font-size: 20px;"></i>
+                                                        <form id="image-submit">
+                                                            <input class="file-upload" name="img" type="file" accept="image/*"/>
+                                                            <input type="submit" class="btn btn-secondary btn-sm p-label" value="Upload">
+                                                        </form>
+                                                    </div>
+                                                   
+                                                </div>                   
+                                                                            
+    
+                                                <p id="about" ></p>
+                                                <span>
+                                                <a data-toggle="collapse" href="#newBio" aria-expanded="false" aria-controls="newBio">
+                                                        <i class="fa fa-pencil mt-3" aria-hidden="true"></i>
+                                                        Change Bio
+                                                </a></span>                          
+                                    
+                                            </div>   
+                                            <div class="collapse multi-collapse mt-2" id="newBio">
+                                                <div class="card-body">
+                                                    <div class="modal-body">
+                                                        <textarea class="col-sm-12" id="bio_text" rows=4 maxlength="500"></textarea><br>
+                                                        <button class="col-sm-2 btn btn-primary btn-sm float-right mt-1" id="bio_add" onclick="changeBio(event);">Change</button>
+                                                    </div>
+                                                </div>
+                                            </div>   
+                                        </div>
+    
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="listing_features" >
+                                            <div class="listing_title">
+                                                <h3>Qualifications</h3>
+                                            </div>
+                                            <ul id="qualifs"></ul>
+                                            
+                                            <a class="ml-5" data-toggle="collapse" href="#newQualif" aria-expanded="false" aria-controls="newQualif">
+                                                <i class="fa fa-plus-circle mt-3" aria-hidden="true" style="font-size:20px;"></i></a>
+                                            <div class="collapse multi-collapse mt-1" id="newQualif" style="font-size:24px;">
+                                                <div class="card-body">
+                                                    <div class="modal-body">
+                                                        <textarea class="col-sm-12" id="qualif_text" rows=2 maxlength="50"></textarea><br>
+                                                        <button class="col-sm-2 btn btn-primary btn-sm float-right mt-1" id="qualif_add" onclick="addNewQualif(event);">Add</button>
+                                                    </div>
+                                                </div>
+                                            </div>                              
+                                        </div>
+                                    </div>
+    
+                                                
+                                    
+                                </div>
+
+    
+                                
+                                <div class="col-lg-6">
+                                    <div class="listing_video" style="display:none;">
+                                        <div class="listing_title">
+                                            <h3>Video</h3>
+                                        </div>
+                                        <div
+                                            class="video_container d-flex flex-column align-items-center justify-content-center">
+                                            <img src="images/video.jpg" alt="">
+                                            <div class="video_button"><a class="youtube"
+                                                    href="https://www.youtube.com/embed/IV3ueyrp5M4?autoplay=1"
+                                                    id="video"><i class="fa fa-play" aria-hidden="true"></i></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+
+        <footer class="footer">
+
+            <div class="footer_bar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div
+                                class="footer_bar_content d-flex flex-md-row flex-column align-items-md-center align-items-start justify-content-start">
+                                <div class="copyright order-md-1 order-2">
+                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                    Copyright &copy;
+                                    <script>document.write(new Date().getFullYear());</script> All rights reserved |
+                                    This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
+                                        href="https://colorlib.com" target="_blank">Colorlib</a>
+                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                </div>
+                                <nav class="footer_nav order-md-2 order-1 ml-md-auto">
+                                    <ul
+                                        class="d-flex flex-md-row flex-column align-items-md-center align-items-start justify-content-start">
+                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="about.html">About us</a></li>
+                                        <li><a href="listings.html">Listings</a></li>
+                                        <li><a href="blog.html">News</a></li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <template id="comment_temp">
+        <div class="comment p-4">
+            <div>
+                <div class="commenter"></div>
+                <div class="date text-muted"></div>
+            </div>
+            <div class="content"></div>
+        </div>
+        </hr>
+    </template>
+          
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="styles/bootstrap-4.1.2/popper.js"></script>
+    <script src="styles/bootstrap-4.1.2/bootstrap.min.js"></script>
+    <script src="plugins/greensock/TweenMax.min.js"></script>
+    <script src="plugins/greensock/TimelineMax.min.js"></script>
+    <script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
+    <script src="plugins/greensock/animation.gsap.min.js"></script>
+    <script src="plugins/greensock/ScrollToPlugin.min.js"></script>
+    <script src="plugins/easing/easing.js"></script>
+    <script src="plugins/progressbar/progressbar.min.js"></script>
+    <script src="plugins/parallax-js-master/parallax.min.js"></script>
+    <script src="plugins/colorbox/jquery.colorbox-min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
+    <script src="js/userbar.js"></script>
+    <script src="js/single.js"></script>
+    <script src="js/tutorprofile.js"></script>
+    <script src="js/single-tutor.js"></script>
+</body>
+
+</html>
