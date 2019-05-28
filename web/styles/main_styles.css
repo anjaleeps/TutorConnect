@@ -1243,6 +1243,11 @@ section
 	font-size: 12px;
 	margin-top: 9px;
 }
+.welcome-text
+{
+	font-size:25px;
+}
+
 
 /*********************************
 10. Testimonials
